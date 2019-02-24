@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!--自动加载application.properties文件-->
+<generatorConfiguration>
+    <properties resource="application.properties"></properties>
+    <!--mysql驱动包的位置-->
+    <classPathEntry location="${db.mysql.location}"/>
+    <context id="context" targetRuntime="MyBatis3Simple"  >
+        <commentGenerator>
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${spring.datasource.druid.driver-class-name}"
+                        password="${spring.datasource.druid.password}"
+                        userId="${spring.datasource.druid.username}"
+                        connectionURL="${spring.datasource.druid.url}"/>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成pojo实体类-->
+        <javaModelGenerator targetPackage="com.wzn.pojo" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成mybatis的映射文件-->
+        <sqlMapGenerator targetPackage="com.wzn.mapper" targetProject="./src/main/resources">
+            <property name="enableSubpackages" value="false"/>
+        </sqlMapGenerator>
+        <!--生成dao接口-->
+        <javaClientGenerator targetPackage="com.wzn.dao" targetProject="./src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+
+        <!--表配置，tableName支持%，表示全部生成-->
+        <table tableName="w_user" domainObjectName="UserInfo" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="w_category" domainObjectName="Category" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="w_product" domainObjectName="Product" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="w_cart" domainObjectName="Cart" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="w_order" domainObjectName="Order" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="w_order_item" domainObjectName="OrderItem" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="w_pay_info" domainObjectName="PayInfo" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table tableName="w_shopping" domainObjectName="Shopping" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+
+    </context>
+</generatorConfiguration>

@@ -1,8 +1,11 @@
 package com.wzn.dao;
 
+import com.wzn.common.ServerResponse;
 import com.wzn.pojo.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 @Mapper
 public interface UserInfoMapper {
@@ -45,4 +48,30 @@ public interface UserInfoMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(UserInfo record);
+
+    /*校验用户名是否存在*/
+
+    int checkUsername(String username);
+     /* <!--根据用户名和密码查询用户信息-->
+     * 有多个参数要写@Param
+     * */
+
+    UserInfo getUserInfoByUsernameAndPass(@Param("username") String username, @Param("password") String password);
+/*校验邮箱*/
+    int checkEmail(String email);
+
+    /*根据用户名查询密码问题*/
+
+    String getQuestionByUsername(String username);
+
+    /*根据用户名和密保问题及答案查询*/
+
+    int selectByUsernameAndQuestionAndAnswer(@Param("username") String username, @Param("question") String question,@Param("answer") String answer);
+
+    /*修改用户密码*/
+    int upadateUserPassword(@Param("username") String username,@Param("password") String newPassword);
+    /*更新用户信息*/
+    int updateUserBySelectActive(UserInfo userInfo);
+
+
 }
